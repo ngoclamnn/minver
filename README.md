@@ -42,7 +42,11 @@ _NOTE: The MinVer package reference should normally include `PrivateAssets="All"
 
 When the current commit is tagged with a version, the tag is used as-is.
 
-When the current commit is _not_ tagged, MinVer searches the commit history for the latest tag. If the latest tag found is a [pre-release](https://semver.org/spec/v2.0.0.html#spec-item-9), MinVer will use it as-is. If the latest tag found is RTM (not pre-release), MinVer will add default pre-release identifiers. The default pre-release phase is "alpha", but this [can be customised](#can-i-change-the-default-pre-release-phase-from-alpha-to-something-else). MinVer will also increase the patch number, but this [can also be customised](#can-i-auto-increment-the-minor-or-major-version-after-an-rtm-tag-instead-of-the-patch-version). For example, If the latest tag is `1.0.0`, the current version will be `1.0.1-alpha.0`.
+When the current commit is _not_ tagged, MinVer searches the commit history for the latest tag.
+
+If the latest tag found is a [pre-release](https://semver.org/spec/v2.0.0.html#spec-item-9), MinVer will use the version from the tag and add the height to the pre-release identifiers (see below).
+
+If the latest tag found is RTM (not pre-release), MinVer will add default pre-release identifiers. The default pre-release phase is "alpha", but this [can be customised](#can-i-change-the-default-pre-release-phase-from-alpha-to-something-else). MinVer will also increase the patch number, but this [can also be customised](#can-i-auto-increment-the-minor-or-major-version-after-an-rtm-tag-instead-of-the-patch-version). For example, If the latest tag is `1.0.0`, the current version will be `1.0.1-alpha.0`.
 
 If no tag is found either on the current commit or in the commit history, the default version `0.0.0-alpha.0` is used.
 
@@ -61,7 +65,7 @@ MinVer sets the following custom properties:
 
 Those properties are used to set the following .NET SDK properties, satisfying the official [open-source library guidance for version numbers](https://docs.microsoft.com/en-ca/dotnet/standard/library-guidance/versioning#version-numbers):
 
-Property | Value
+Property | Value | Example
 -- | --
 `AssemblyVersion` | `{MinVerMajor}.0.0.0`
 `FileVersion` | `{MinVerMajor}.{MinVerMinor}.{MinVerPatch}.0`
